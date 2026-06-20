@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikZ Conversion Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff9e6; /* Soft pastel yellow background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+        }
+        
+        /* --- Style for the image container --- */
+        .img-container {
+            width: 100%;
+            margin-bottom: 25px; /* More space before heading */
+            display: flex;
+            justify-content: center;
+        }
+        /* --- Style for the image itself --- */
+        .img-container img {
+            max-width: 100%; /* Make it fit the container */
+            max-height: 180px; /* Limit height to prevent overpowering */
+            height: auto;
+            border-radius: 15px; /* Softer edges to match the card */
+            object-fit: cover; /* Crop slightly to fit if needed without distortion */
+            border: 3px solid #fff0d0; /* Soft cream border to match bar track */
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #bf7f00; /* Rich burnt orange for heading */
+            font-size: 26px;
+        }
+        .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+        /* The Progress Bar Background */
+        .progress-track {
+            background-color: #fff0d0; /* Light cream/yellow track */
+            border-radius: 50px;
+            height: 24px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        /* The Progress Bar Fill */
+        .progress-fill {
+            background: linear-gradient(90deg, #ffdc6c, #ffa726); /* Yellow to orange gradient fill */
+            height: 100%;
+            width: 0%; /* Controlled by JS */
+            border-radius: 50px;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stats {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .percentage {
+            font-weight: bold;
+            color: #bf7f00; /* Rich burnt orange matching heading */
+            font-size: 24px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="img-container">
+            <img src="sloth_stamp.png" alt="Conversion speed: Sloth-certified">
+        </div>
+
+        <h1>Progress bar</h1>
+        <p class="subtitle">Goal: 18,400 diagrams (...will be done sooner than this guy stamps the paper)</p>
+
+        <div class="progress-track">
+            <div class="progress-fill" id="bar-fill"></div>
+        </div>
+
+        <div class="stats">
+            <strong id="current-text">0</strong> / <span id="total-text">0</span>
+        </div>
+        <div class="percentage" id="percent-text">0%</div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 🛠️ UPDATE YOUR PROGRESS HERE 🛠️
+        // Just change these two numbers, save, and commit!
+        // ==========================================
+        const currentFigures = 2939;
+        const totalFigures = 18400;
+
+        // Automatically calculates the percentage and updates the UI
+        const percentage = ((currentFigures / totalFigures) * 100).toFixed(1);
+
+        document.getElementById('current-text').innerText = currentFigures.toLocaleString();
+        document.getElementById('total-text').innerText = totalFigures.toLocaleString();
+        document.getElementById('percent-text').innerText = percentage + "% Complete";
+
+        // Animates the bar filling up smoothly when the page loads
+        setTimeout(() => {
+            document.getElementById('bar-fill').style.width = percentage + "%";
+        }, 150);
+    </script>
+
+</body>
+</html>
